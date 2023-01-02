@@ -1,9 +1,12 @@
 <script lang="ts">
-  import { hello } from "./hello";
+import { generations } from "./generations";
 </script>
 
-<h1>Welcome to {hello}!!!!</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+{#each generations as generation (generation.id)}
+  <h1>{generation.name}</h1>
+  <p>Games: {generation.games.join(', ')}</p>
+  <p>Main region: {generation.main_region}</p>
+{/each}
 
 <style>
 
