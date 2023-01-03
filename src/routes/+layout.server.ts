@@ -6,7 +6,7 @@ export const load = (async ({fetch}) => {
     We need to get this data for the modal-enabled branches, but not for the main branch
     The lesson_id will be changed per branch - we're hardcoding for now and will change per branch
   */
-  const lesson_id = '103'
+  const lesson_id = '103';
   const response = await fetch(`https://${productionApi}/api/lessons/${lesson_id}`);
   const data  = await response.json();
 
