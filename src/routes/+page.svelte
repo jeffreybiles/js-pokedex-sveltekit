@@ -1,14 +1,29 @@
 <script lang="ts">
 import type { PageData } from "./$types";
 import { generations } from "./generations";
+import { page } from "$app/stores";
 
 export let data: PageData;
+
 </script>
 
 <div class="generations">
-{#each generations as generation (generation.id)}
-  <div class="generation">{generation.main_region}</div>
-{/each}
+  <a
+    class="generation"
+    class:active={$page.url.searchParams.get('generation') === null}
+    href="/"
+  >
+    All
+  </a>
+  {#each generations as generation (generation.id)}
+    <a
+      class="generation"
+      class:active={$page.url.searchParams.get('generation') === generation.id.toString()}
+      href="/?generation={generation.id}"
+    >
+      {generation.main_region}
+    </a>
+  {/each}
 </div>
 
 <div class="monsters">
@@ -39,9 +54,17 @@ export let data: PageData;
     border: 1px solid black;
     background-color: #f9f9f9;
     color: #333;
+    text-decoration: none;
+  }
+  .generation.active {
+    background-color: #333;
+    color: #f9f9f9;
   }
   .generation:hover {
     background-color: #eee;
+  }
+  .generation.active:hover {
+    background-color: #555;
   }
   .monsters {
     display: flex;
