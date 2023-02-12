@@ -1,6 +1,5 @@
 <script lang="ts">
-    import type { IndexMonster } from "./+page";
-
+  import type { IndexMonster } from "./+page";
 
   export let monster: IndexMonster;
   export let updateSearchParams: (key: string, value: string) => void;
