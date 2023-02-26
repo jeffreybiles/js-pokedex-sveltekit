@@ -1,10 +1,11 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import { caughtMonsters } from "../lib/stores";
 </script>
 
 <div class="navbar">
   <a href="/" class:active={$page.url.pathname == '/'}>Home</a>
-  <a href="/my-monsters" class:active={$page.url.pathname == '/my-monsters'}>My Monsters</a>
+  <a href="/my-monsters" class:active={$page.url.pathname == '/my-monsters'}>My Monsters ({$caughtMonsters.length})</a>
 </div>
 
 <div class="container">
