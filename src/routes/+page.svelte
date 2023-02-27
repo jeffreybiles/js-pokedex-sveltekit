@@ -4,6 +4,7 @@ import { page } from "$app/stores";
 import { generations } from "./generations";
 import { goto } from "$app/navigation";
 import Monster from "./Monster.svelte";
+import { count } from '$lib/stores';
 
 export let data: PageData;
 
@@ -48,6 +49,9 @@ const submitSearch = (e: Event) => {
 {/if}
 
 <div class="generations">
+  <!-- button that adds to count -->
+  <button on:click={() => count.set($count + 1)}>++ {$count}</button>
+
   <button
     class="generation"
     class:active={selectedGenerationId == 'all'}
