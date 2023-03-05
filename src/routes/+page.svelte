@@ -4,6 +4,7 @@ import { page } from "$app/stores";
 import { generations } from "./generations";
 import { goto } from "$app/navigation";
 import Monster from "./Monster.svelte";
+import { caughtMonsters } from "$lib/stores";
 
 export let data: PageData;
 
@@ -14,11 +15,6 @@ let searchString = ''
 $: selectedMonsters = data.monsters.filter((monster) => {
   return monster.name.toLowerCase().includes(searchString.toLowerCase());
 })
-
-$: monsterId = $page.url.searchParams.get("monsterId") || '';
-$: monster = data.monsters.find((monster) => monster.id === monsterId);
-$: monsterId2 = $page.url.searchParams.get("monsterId2") || '';
-$: monster2 = data.monsters.find((monster) => monster.id === monsterId2);
 
 $: selectedGenerationId = $page.url.searchParams.get('generation_id') || '';
 
@@ -33,19 +29,6 @@ const submitSearch = (e: Event) => {
 }
 
 </script>
-
-{#if monster}
-  <Monster
-    monster={monster}
-    updateSearchParams={updateSearchParams}
-  />
-{/if}
-{#if monster2}
-  <Monster
-    monster={monster2}
-    updateSearchParams={updateSearchParams}
-  />
-{/if}
 
 <div class="generations">
   <button
@@ -75,8 +58,6 @@ const submitSearch = (e: Event) => {
   {#each selectedMonsters as monster (monster.id)}
     <Monster
       monster={monster}
-      updateSearchParams={updateSearchParams}
-      isInteractive={true}
     />
   {/each}
 </div>
